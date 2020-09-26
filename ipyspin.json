@@ -1,0 +1,5 @@
+{
+  "load_extensions": {
+    "ipyspin/extension": true
+  }
+}
