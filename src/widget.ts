@@ -95,11 +95,9 @@ export class SpinnerView extends DOMWidgetView {
     for (let opt of this.opt_names) {
       let opt_camel = opt;
       let i = opt.indexOf('_');
-      console.log(opt, i);
       if (i != -1) {
         opt_camel = opt.substring(0, i).concat(opt[i+1].toUpperCase(), opt.substring(i+2));
       }
-      console.log(opt_camel);
       this.opts[opt_camel] = this.model.get(opt);
     }
     if (this.spinner) {
