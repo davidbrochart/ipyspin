@@ -39,7 +39,7 @@ class Spinner(DOMWidget):
     left = Unicode('50%').tag(sync=True)  # Left position relative to parent
     shadow = Unicode('0 0 1px transparent').tag(sync=True)  # Box-shadow for the lines
     z_index = Float(2000000000).tag(sync=True)  # The z-index (defaults to 2e9)
-    class_name = Unicode('spinner').tag(sync=True)  # The CSS class to assign to the spinner
+    class_name = Unicode('ipyspinner').tag(sync=True)  # The CSS class to assign to the spinner
     position = Unicode('absolute').tag(sync=True)  # Element positioning
 
     _is_stopped = Bool(False).tag(sync=True)

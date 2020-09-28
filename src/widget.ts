@@ -40,7 +40,7 @@ export class SpinnerModel extends DOMWidgetModel {
       left: '50%', // Left position relative to parent
       shadow: '0 0 1px transparent', // Box-shadow for the lines
       z_index: 2000000000, // The z-index (defaults to 2e9)
-      class_name: 'spinner', // The CSS class to assign to the spinner
+      class_name: 'ipyspinner', // The CSS class to assign to the spinner
       position: 'absolute', // Element positioning
       _is_stopped: false
     };
