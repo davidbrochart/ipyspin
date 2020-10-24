@@ -42,7 +42,12 @@ class Spinner(DOMWidget):
     class_name = Unicode('ipyspinner').tag(sync=True)  # The CSS class to assign to the spinner
     position = Unicode('absolute').tag(sync=True)  # Element positioning
 
+    window_url = Unicode(read_only=True).tag(sync=True)
+
     _is_stopped = Bool(False).tag(sync=True)
+
+    def __init__(self, *args, **kwargs):
+        super(Spinner, self).__init__(*args, **kwargs)
 
     def stop(self):
         self._is_stopped = True
