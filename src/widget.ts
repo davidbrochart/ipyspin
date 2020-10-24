@@ -48,7 +48,13 @@ export class SpinnerModel extends DOMWidgetModel {
 
   static serializers: ISerializers = {
     ...DOMWidgetModel.serializers
-  };
+  }
+
+  initialize(attributes: any, options: any) {
+    super.initialize(attributes, options);
+    this.set('window_url', window.location.href);
+    this.save_changes();
+  }
 
   static model_name = 'SpinnerModel';
   static model_module = MODULE_NAME;
