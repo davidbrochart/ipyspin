@@ -1,33 +1,28 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
-
 from __future__ import print_function
-from glob import glob
+from setuptools import setup, find_packages
+import os
 from os.path import join as pjoin
-from os import path
-
+from distutils import log
 
 from jupyter_packaging import (
-    create_cmdclass, install_npm, ensure_targets,
-    combine_commands, ensure_python,
-    get_version
+    create_cmdclass,
+    install_npm,
+    ensure_targets,
+    combine_commands,
+    get_version,
 )
 
-from setuptools import setup, find_packages
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 
-HERE = path.dirname(path.abspath(__file__))
+log.set_verbosity(log.DEBUG)
+log.info('setup.py entered')
+log.info('$PATH=%s' % os.environ['PATH'])
 
-# The name of the project
 name = 'ipyspin'
+LONG_DESCRIPTION = 'A Jupyter widget library for dynamically creating spinning activity indicators'
 
-# Ensure a valid python version
-ensure_python('>=3.4')
-
-# Get our version
+# Get ipyspin version
 version = get_version(pjoin(name, '_version.py'))
 
 nb_path = pjoin(HERE, name, 'nbextension', 'static')
@@ -53,7 +48,6 @@ data_files_spec = [
     ('etc/jupyter/nbconfig/notebook.d' , HERE, 'ipyspin.json')
 ]
 
-
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
@@ -61,40 +55,37 @@ cmdclass['jsdeps'] = combine_commands(
     ensure_targets(jstargets),
 )
 
-
 setup_args = dict(
-    name            = name,
-    description     = 'A Jupyter widget library for dynamically creating spinning activity indicators',
-    version         = version,
-    scripts         = glob(pjoin('scripts', '*')),
-    cmdclass        = cmdclass,
-    packages        = find_packages(),
-    author          = 'David Brochart',
-    author_email    = 'david.brochart@gmail.com',
-    url             = 'https://github.com/davidbrochart/ipyspin',
-    license         = 'BSD',
-    platforms       = "Linux, Mac OS X, Windows",
-    keywords        = ['Jupyter', 'Widgets', 'IPython'],
-    classifiers     = [
-        'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Framework :: Jupyter',
-    ],
-    include_package_data = True,
-    install_requires = [
+    name=name,
+    version=version,
+    description='A Jupyter widget library for dynamically creating spinning activity indicators',
+    long_description=LONG_DESCRIPTION,
+    include_package_data=True,
+    install_requires=[
         'ipywidgets>=7.6.0',
     ],
-    extras_require = {},
-    entry_points = {
-    },
+    packages=find_packages(),
+    zip_safe=False,
+    cmdclass=cmdclass,
+    author='David Brochart',
+    author_email='david.brochart@gmail.com',
+    url='https://github.com/davidbrochart/ipyspin',
+    keywords=[
+        'ipython',
+        'jupyter',
+        'widgets',
+    ],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Framework :: IPython',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'Topic :: Multimedia :: Graphics',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+    ],
 )
 
-if __name__ == '__main__':
-    setup(**setup_args)
+setup(**setup_args)
