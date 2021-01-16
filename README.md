@@ -58,7 +58,7 @@ Or using `conda`:
 conda install -c conda-forge ipyspin
 ```
 
-And if you use jupyterlab:
+And if you use jupyterlab <= 2:
 
 ```bash
 conda install -c conda-forge nodejs
@@ -75,7 +75,7 @@ jupyter nbextension enable --py [--sys-prefix|--user|--system] ipyspin
 
 ```bash
 # First install the python package. This will also build the JS packages.
-pip install -e ".[test, examples]"
+pip install -e .
 ```
 
 When developing your extensions, you need to manually enable your extensions with the
