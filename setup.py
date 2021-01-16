@@ -7,16 +7,19 @@
 from __future__ import print_function
 from glob import glob
 from os.path import join as pjoin
+from os import path
 
 
-from setupbase import (
+from jupyter_packaging import (
     create_cmdclass, install_npm, ensure_targets,
-    find_packages, combine_commands, ensure_python,
-    get_version, HERE
+    combine_commands, ensure_python,
+    get_version
 )
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
+
+HERE = path.dirname(path.abspath(__file__))
 
 # The name of the project
 name = 'ipyspin'
@@ -39,14 +42,14 @@ jstargets = [
 package_data_spec = {
     name: [
         'nbextension/static/*.*js*',
-        'labextension/*.tgz'
+        'labextension/**'
     ]
 }
 
 data_files_spec = [
     ('share/jupyter/nbextensions/ipyspin',
         nb_path, '*.js*'),
-    ('share/jupyter/lab/extensions', lab_path, '*.tgz'),
+    ('share/jupyter/labextensions/ipyspin', lab_path, '**'),
     ('etc/jupyter/nbconfig/notebook.d' , HERE, 'ipyspin.json')
 ]
 
@@ -54,7 +57,7 @@ data_files_spec = [
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
-    install_npm(HERE, build_cmd='build:all'),
+    install_npm(HERE, build_cmd='build'),
     ensure_targets(jstargets),
 )
 
@@ -86,28 +89,9 @@ setup_args = dict(
     ],
     include_package_data = True,
     install_requires = [
-        'ipywidgets>=7.0.0',
+        'ipywidgets>=7.6.0',
     ],
-    extras_require = {
-        'test': [
-            'pytest>=4.6',
-            'pytest-cov',
-            'nbval',
-        ],
-        'examples': [
-            # Any requirements for the examples to run
-        ],
-        'docs': [
-            'sphinx>=1.5',
-            'recommonmark',
-            'sphinx_rtd_theme',
-            'nbsphinx>=0.2.13,<0.4.0',
-            'jupyter_sphinx',
-            'nbsphinx-link',
-            'pytest_check_links',
-            'pypandoc',
-        ],
-    },
+    extras_require = {},
     entry_points = {
     },
 )
