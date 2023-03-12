@@ -6,7 +6,7 @@ A Jupyter widget library for dynamically creating spinning activity indicators (
 
 You can try it online by clicking on this badge:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/davidbrochart/ipyspin/master?filepath=examples%2Fintroduction.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/davidbrochart/ipyspin/master?urlpath=lab%2Ftree%2Fexamples%2Fintroduction.ipynb)
 
 ## API
 

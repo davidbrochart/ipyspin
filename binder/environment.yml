@@ -1,0 +1,6 @@
+name: ipyspin
+channels:
+  - conda-forge
+dependencies:
+  - ipyspin =1.0.1
+  - jupyterlab=3
